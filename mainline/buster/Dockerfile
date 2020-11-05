@@ -1,4 +1,4 @@
-FROM debian:buster-slim
+FROM quay.io/ibmz/debian:buster-slim
 
 LABEL maintainer="NGINX Docker Maintainers <docker-maint@nginx.com>"
 
