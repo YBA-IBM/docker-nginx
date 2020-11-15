@@ -112,15 +112,6 @@ This behavior can be changed via the following environment variables:
 		-	ex.) `/etc/nginx/templates/default.conf.template` will be output with the filename `/etc/nginx/conf.d/default.conf`.
 	-	This directory must be writable by the user running a container.
 
-## Running nginx in read-only mode
-
-To run nginx in read-only mode, you will need to mount a Docker volume to every location where nginx writes information. The default nginx configuration requires write access to `/var/cache` and `/var/run`. This can be easily accomplished by running nginx as follows:
-
-```console
-$ docker run -d -p 80:80 --read-only -v $(pwd)/nginx-cache:/var/cache/nginx -v $(pwd)/nginx-pid:/var/run nginx
-```
-
-If you have a more advanced configuration that requires nginx to write to other locations, simply add more volume mounts to those locations.
 
 ## Running nginx in debug mode
 
@@ -157,32 +148,6 @@ $ id
 uid=101(nginx) gid=101(nginx) groups=101(nginx)
 ```
 
-## Running nginx as a non-root user
-
-It is possible to run the image as a less privileged arbitrary UID/GID. This, however, requires modification of nginx configuration to use directories writeable by that specific UID/GID pair:
-
-```console
-$ docker run -d -v $PWD/nginx.conf:/etc/nginx/nginx.conf nginx
-```
-
-where nginx.conf in the current directory should have the following directives re-defined:
-
-```nginx
-pid        /tmp/nginx.pid;
-```
-
-And in the http context:
-
-```nginx
-http {
-    client_body_temp_path /tmp/client_temp;
-    proxy_temp_path       /tmp/proxy_temp_path;
-    fastcgi_temp_path     /tmp/fastcgi_temp;
-    uwsgi_temp_path       /tmp/uwsgi_temp;
-    scgi_temp_path        /tmp/scgi_temp;
-...
-}
-```
 
 # License
 
