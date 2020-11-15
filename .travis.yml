@@ -6,7 +6,7 @@ env:
     - TEST_DIR="$PWD/
 #    - TEST_SCRIPT="test.sh"
     - BUILD_DIR="$PWD/mainline/buster/"
-    - REPO="quay.io/ibmz/docker-nginx"
+    - REPO="quay.io/ibmz/nginx"
     - TAG="$REPO:1.19.4"
 before_script: 
 #  - cd $TEST_DIR && chmod +x $TEST_SCRIPT
