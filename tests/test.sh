@@ -19,6 +19,8 @@ docker run --rm --name some-nginx -d -p 8080:80 some-content-nginx
 docker stop some-nginx
 docker build -t custom-nginx conf
 docker run --rm --name my-custom-nginx-container -d custom-nginx
+docker run --rm --name debug-nginx -d -e NGINX_ENTRYPOINT_QUIET_LOGS=1  quay.io/ibmz/nginx:1.19.4 nginx-debug -g 'daemon off;'
+docker stop debug-nginx
 
 
 echo -e "\n $ANSI_GREEN *** FUNCTIONAL TEST(S) COMPLETED SUCESSFULLY *** $ANSI_RESET \n"
